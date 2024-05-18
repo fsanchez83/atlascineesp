@@ -19,7 +19,7 @@ tmdb.API_KEY = secrets['TMDB']['API_KEY']
 
 # Leer la lista básica de pelis
 
-lista_con_id = pd.read_csv('movie_data_parte1.csv', sep=';')
+lista_con_id = pd.read_csv('movie_data_parte3.csv', sep=';')
 
 Atributos_peli = ["tmdb_id", "Titulo", "Popularidad", 'Rating', 'Fecha', 'Duracion', 'Pais', 'Idioma',
                   'Presupuesto', 'Ganancia', 'Generos', 'Director', 'Director_genre',
