@@ -19,7 +19,7 @@ tmdb.API_KEY = secrets['TMDB']['API_KEY']
 
 # Leer la lista básica de pelis
 
-lista_con_id = pd.read_csv('movie_data_parte3.csv', sep=';')
+lista_con_id = pd.read_csv('movie_data_chinas.csv', sep=';')
 
 Atributos_peli = ["tmdb_id", "Titulo", "Popularidad", 'Rating', 'Fecha', 'Duracion', 'Pais', 'Idioma',
                   'Presupuesto', 'Ganancia', 'Generos', 'Director', 'Director_genre',
@@ -29,7 +29,7 @@ df_films = pd.DataFrame(columns=Atributos_peli)
 
 search = tmdb.Search()
 
-dataset_inicial = pd.read_csv('dataset_pelis.csv', sep=';')
+dataset_inicial = pd.read_csv('dataset_pelis_chinas.csv', sep=';')
 
 dataset_nuevas = pd.merge(dataset_inicial,lista_con_id,left_on=['tmdb_id'],
                           right_on=['id'],how="outer",indicator=True)
@@ -107,9 +107,9 @@ for index, row in dataset_nuevas_pelis.iterrows():
         print("Error en el nombre")
         pelis_con_error.append(row['original_title'])
 
-dataset_inicial.to_csv('dataset_pelis.csv', sep=';', index=False)
+dataset_inicial.to_csv('dataset_pelis_chinas.csv', sep=';', index=False)
 
 df_pelis_con_error = pd.DataFrame(pelis_con_error, columns=['titulo'])
-df_pelis_con_error.to_csv('pelis_con_error.csv', sep=';', index=False)
+df_pelis_con_error.to_csv('pelis_con_error_chinas.csv', sep=';', index=False)
 
 print('FIN')
