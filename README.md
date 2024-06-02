@@ -14,3 +14,6 @@ Consta de 2 scripts.
   etc. Hay que tener en cuenta que no toda la información está completa, por lo que 
   algunos campos de ciertas películas se guardan vacíos. Todo esto se guarda en el 
   archivo dataset_pelis.csv
+
+
+Se ha ampliado el proyecto para los cines chinos (China, Hong Kong, Taiwán, Macao). Para ello se incluyen en el proyectos los datasets correspondientes, pero no el pbix, dado que es análogo al del cine español.
