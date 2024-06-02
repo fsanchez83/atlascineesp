@@ -18,11 +18,11 @@ headers = {
 date_in = dataConfig['Fechas']['date_in']
 date_fin = dataConfig['Fechas']['date_fin']
 
-def get_movie_data(page, date_in, date_fin):
+def get_movie_data(page, date_in, date_fin, pais):
     url = f"https://api.themoviedb.org/3/discover/movie?include_adult=false" \
           f"&include_video=true&page={page}&primary_release_date.gte=" \
           f"{date_in}&primary_release_date.lte={date_fin}&sort_by=primary_release_date" \
-          f".asc&with_origin_country=ES"
+          f".asc&with_origin_country={pais}"
     response = requests.get(url, headers=headers)
     data = response.json()
     return data.get('results', [])
@@ -39,13 +39,15 @@ def save_to_csv(movie_data, filename):
         for movie in movie_data:
             # Convertimos los géneros a una cadena separada por comas
             movie['genre_ids'] = ','.join(map(str, movie['genre_ids']))
+            movie['overview'] = movie['overview'].replace('\n', ' ').replace('\r', ' ')
             writer.writerow(movie)
 
 def main():
     filename = dataConfig['Resultados']['filename_lista']
-    #for page in range(1, 3):  # Itera sobre las páginas de la API
+    pais = dataConfig['Filtros']['pais']
+    #for page in range(1, 3):  # Itera sobre las páginas de la API. MAXIMO, 500 PAGINAS
     for page in range(1, 501):  # Itera sobre las páginas de la API
-        movie_data = get_movie_data(page,date_in,date_fin)
+        movie_data = get_movie_data(page, date_in, date_fin, pais)
         if movie_data:
             save_to_csv(movie_data, filename)
             #print(f"Guardando datos de la página {page} en {filename}")
